@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocuMatrix — 100% Free & Private Online PDF & Career Suite</title>
+  <meta name="description" content="Merge PDFs, compress images, extract text, convert images to PDF, check ATS resume scores, and watermark documents. 100% client-side privacy, free forever.">
+
+  <!-- Tailwind CSS CDN with Original Theme Configuration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              800: '#9f1239',
+              900: '#881337',
+            },
+            accent: {
+              500: '#3b82f6',
+              600: '#2563eb',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6.5.1 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Core Client-Side Engines -->
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
+
+  <!-- Modular Stylesheet Overrides -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+
+  <!-- Prevent Dark Theme Flash -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('dm_theme') || 'light';
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-150">
+
+  <!-- Global Toast Alert Container -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-5 py-3 rounded-xl shadow-2xl text-sm flex items-center space-x-3 border border-slate-700 pointer-events-none">
+    <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600 text-lg"></i>
+    <span id="toastMsg" class="font-medium">Action completed successfully!</span>
+  </div>
+
+  <!-- Primary Navigation Header -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Brand Logo -->
+        <a href="#/" class="flex items-center space-x-3 cursor-pointer no-underline">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-rose-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/25">
+            <i class="fa-solid fa-layer-group text-lg"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">Docu<span class="text-brand-600">Matrix</span></span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">100% Local</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block">Zero Server Latency • No File Size Limits</p>
+          </div>
+        </a>
+
+        <!-- Top Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-semibold" aria-label="Tool Navigation">
+          <a href="#/" class="px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">All Tools</a>
+          <a href="#/pdf/merge" class="px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Merge PDF</a>
+          <a href="#/image/compress" class="px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Compress</a>
+          <a href="#/text/extractor" class="px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">OCR Text</a>
+          <a href="#/pdf/img2pdf" class="px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Img to PDF</a>
+          <a href="#/career/ats" class="px-3 py-2 rounded-lg text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-950/40 transition">ATS Resume</a>
+          <a href="#/pdf/watermark" class="px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Watermark</a>
+        </nav>
+
+        <!-- Right Utilities: Theme Toggle & Privacy Modal -->
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          <button id="themeToggle" class="w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Toggle Theme">
+            <i class="fa-solid fa-moon dark:hidden"></i>
+            <i class="fa-solid fa-sun hidden dark:inline"></i>
+          </button>
+          <button id="btn-open-privacy" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            <i class="fa-solid fa-shield-halved text-emerald-500"></i> Privacy Audit
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Top Responsive Ad Container -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 w-full">
+    <div class="w-full bg-white dark:bg-slate-900 border border-dashed border-slate-300 dark:border-slate-800 rounded-xl p-3 text-center min-h-[90px] flex flex-col justify-center items-center shadow-xs">
+      <div class="flex items-center gap-2 text-[10px] tracking-wider uppercase font-mono text-slate-400">
+        <i class="fa-solid fa-rectangle-ad"></i> Sponsored Leaderboard
+      </div>
+      <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Responsive Ad Placement (728x90 / 970x90)</p>
+    </div>
+  </div>
+
+  <!-- Primary Application Mounting Point -->
+  <main id="app-root" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <!-- Injected dynamically by assets/js/app.js -->
+  </main>
+
+  <!-- Bottom Ad Banner & SEO FAQ Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full space-y-6">
+    <div class="w-full bg-white dark:bg-slate-900 border border-dashed border-slate-300 dark:border-slate-800 rounded-xl p-4 text-center min-h-[90px] flex flex-col justify-center items-center shadow-xs">
+      <div class="flex items-center gap-2 text-[10px] tracking-wider uppercase font-mono text-slate-400">
+        <i class="fa-solid fa-rectangle-ad"></i> Sponsored Content
+      </div>
+      <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Responsive Display Banner (728x90 / 970x250)</p>
+    </div>
+
+    <!-- Frequently Asked Questions -->
+    <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 space-y-4">
+      <h3 class="text-lg font-bold text-slate-900 dark:text-white">Frequently Asked Questions & Technical Specifications</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+        <div>
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mb-1">Are my uploaded documents secure?</h4>
+          <p>Yes, 100%. DocuMatrix executes all operations (merging, compression, text extraction, and watermarking) locally inside your browser's WebAssembly and JavaScript environment. Your files are never transferred over the network to any third-party server.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mb-1">How does the ATS Resume matcher work?</h4>
+          <p>Our algorithm tokenizes your submitted resume and job description, eliminates common stop words, and evaluates keyword coverage against common recruitment software databases (e.g., Workday, Taleo, Greenhouse). It flags missing qualifications and verifies action verb density.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mb-1">Is there a file size limit?</h4>
+          <p>Because processing runs in your local browser, limits are dictated solely by your computer's RAM. You can comfortably merge and compress documents of 50MB–100MB without artificial restrictions.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mb-1">Can I use this on mobile devices?</h4>
+          <p>Yes. The entire user interface is responsive across tablets, Android devices, iPhones, and desktop browsers without requiring software installation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-500 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="font-bold text-slate-800 dark:text-slate-200">DocuMatrix Suite</span>
+        <span>•</span>
+        <span>Zero Server Footprint • Open Client Tools</span>
+      </div>
+      <div class="flex items-center space-x-4 font-semibold">
+        <button id="footer-btn-privacy" class="hover:text-brand-600 transition">Privacy Policy</button>
+        <button id="footer-btn-terms" class="hover:text-brand-600 transition">Terms of Service</button>
+        <button id="footer-btn-contact" class="hover:text-brand-600 transition">Contact & Support</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Reusable Modal Mounting Point -->
+  <div id="dm-modal-root"></div>
+
+  <!-- Primary Application Bootstrapper -->
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

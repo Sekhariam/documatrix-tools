@@ -1,0 +1,13 @@
+/* Core Design Tokens matching the original visual specification */
+:root {
+  --dm-brand-50: #fff1f2;
+  --dm-brand-100: #ffe4e6;
+  --dm-brand-500: #f43f5e;
+  --dm-brand-600: #e11d48;
+  --dm-brand-700: #be123c;
+  --dm-brand-800: #9f1239;
+  --dm-brand-900: #881337;
+
+  --dm-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --dm-font-mono: 'JetBrains Mono', monospace;
+}

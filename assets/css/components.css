@@ -1,0 +1,287 @@
+/* Tool Cards Grid */
+.dm-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+/* Modern Card Styling */
+.dm-tool-card {
+  background-color: var(--dm-bg-surface);
+  border: 1px solid var(--dm-border-default);
+  border-radius: var(--dm-radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: var(--dm-shadow-xs);
+}
+
+.dm-tool-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--dm-border-strong);
+  box-shadow: var(--dm-shadow-card-hover);
+  text-decoration: none;
+}
+
+.dm-tool-card-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--dm-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.15rem;
+  transition: transform 0.2s ease;
+}
+
+.dm-tool-card:hover .dm-tool-card-icon {
+  transform: scale(1.05);
+}
+
+/* Category Accent Styles */
+.cat-pdf .dm-tool-card-icon {
+  background: var(--dm-pdf-subtle);
+  color: var(--dm-pdf-accent);
+}
+.cat-image .dm-tool-card-icon {
+  background: var(--dm-img-subtle);
+  color: var(--dm-img-accent);
+}
+.cat-text .dm-tool-card-icon {
+  background: var(--dm-txt-subtle);
+  color: var(--dm-txt-accent);
+}
+.cat-career .dm-tool-card-icon {
+  background: var(--dm-car-subtle);
+  color: var(--dm-car-accent);
+}
+
+.dm-tool-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.45rem;
+  color: var(--dm-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dm-tool-card-title svg {
+  color: var(--dm-text-muted);
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.dm-tool-card:hover .dm-tool-card-title svg {
+  transform: translateX(3px);
+  color: var(--dm-text-primary);
+}
+
+.dm-tool-card-desc {
+  font-size: 0.875rem;
+  color: var(--dm-text-secondary);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+/* Category Overview Cards */
+.dm-cat-card {
+  background: var(--dm-bg-surface);
+  border: 1px solid var(--dm-border-default);
+  border-radius: var(--dm-radius-md);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.dm-cat-card:hover {
+  background: var(--dm-bg-elevated);
+  border-color: var(--dm-border-strong);
+  text-decoration: none;
+}
+
+.dm-cat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--dm-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* Dropzone Upload Component */
+.dm-dropzone {
+  border: 2px dashed var(--dm-border-strong);
+  background-color: var(--dm-bg-elevated);
+  border-radius: var(--dm-radius-md);
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dm-dropzone:hover, .dm-dropzone.dragover {
+  border-color: var(--dm-border-focus);
+  background-color: var(--dm-pdf-subtle);
+}
+
+.dm-dropzone-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--dm-radius-full);
+  background: var(--dm-bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: var(--dm-indigo);
+  box-shadow: var(--dm-shadow-sm);
+}
+
+.dm-dropzone p {
+  color: var(--dm-text-secondary);
+  font-size: 0.95rem;
+}
+
+.dm-dropzone span.highlight {
+  color: var(--dm-indigo);
+  font-weight: 600;
+}
+
+/* Interactive Buttons */
+.dm-btn-primary {
+  background: var(--dm-pdf-gradient);
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: var(--dm-radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: var(--dm-shadow-sm);
+}
+
+.dm-btn-primary:hover:not(:disabled) {
+  opacity: 0.95;
+  box-shadow: var(--dm-shadow-md);
+}
+
+.dm-btn-secondary {
+  background-color: var(--dm-bg-surface);
+  color: var(--dm-text-primary);
+  border: 1px solid var(--dm-border-default);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: var(--dm-radius-sm);
+}
+
+.dm-btn-secondary:hover:not(:disabled) {
+  background-color: var(--dm-bg-elevated);
+}
+
+/* Inputs, Textareas, Selects */
+.dm-input, .dm-select, .dm-textarea {
+  width: 100%;
+  background-color: var(--dm-bg-base);
+  border: 1px solid var(--dm-border-default);
+  color: var(--dm-text-primary);
+  padding: 0.8rem 1rem;
+  border-radius: var(--dm-radius-sm);
+  font-size: 0.95rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.dm-input:focus, .dm-select:focus, .dm-textarea:focus {
+  border-color: var(--dm-border-focus);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  outline: none;
+}
+
+/* Reorderable File Items */
+.dm-file-list {
+  list-style: none;
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.dm-file-item {
+  background: var(--dm-bg-surface);
+  border: 1px solid var(--dm-border-default);
+  border-radius: var(--dm-radius-sm);
+  padding: 0.85rem 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--dm-shadow-xs);
+}
+
+/* Status & Progress */
+.dm-progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: var(--dm-bg-elevated);
+  border-radius: var(--dm-radius-full);
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.dm-progress-fill {
+  height: 100%;
+  background: var(--dm-pdf-gradient);
+  width: 0%;
+  transition: width 200ms ease;
+}
+
+/* Modal Window */
+.dm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1.5rem;
+}
+
+.dm-modal {
+  background-color: var(--dm-bg-surface);
+  border: 1px solid var(--dm-border-default);
+  border-radius: var(--dm-radius-lg);
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 2.25rem;
+  box-shadow: var(--dm-shadow-lg);
+}
+
+.dm-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.dm-modal-close {
+  background: transparent;
+  color: var(--dm-text-muted);
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.dm-modal-close:hover {
+  color: var(--dm-text-primary);
+}
